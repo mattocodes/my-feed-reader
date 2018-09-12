@@ -112,10 +112,7 @@ $(function() {
                 done();
             });
 
-
         });
-
-
 
 
 
@@ -125,4 +122,25 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        describe('New Feed Selection', function() {
+            let firstFeedHeader, secondFeedHeader;
+
+            beforeEach(function(done) {
+                loadFeed(0, function() {
+                    // first feed, selecting first entry for comparing
+                    firstFeedHeader = $('.entry h2').first().text();
+                });
+
+                loadFeed(1, function() {
+                    // second feed, selecting first entry for comparing 
+                    secondFeedHeader = $('.entry h2').first().text();
+                    done();
+                });
+            });
+
+            it('contents of each feed should be different', function(done) {
+                expect(firstFeedHeader).not.toMatch(secondFeedHeader);
+                done();
+            });
+        });
 }());
