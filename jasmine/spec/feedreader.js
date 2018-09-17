@@ -99,16 +99,16 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
         describe('Initial Entries', function() {
-            let feed = $('.feed');
-
+            let entry;
             beforeEach(function(done) {
                 loadFeed(0, function() {
+                    entry = $('.entry-link .entry');
                     done();
                 });
             });
 
             it('feed container should have at least one entry', function(done) {
-                expect(feed.children().length).toBeGreaterThan(0);
+                expect(entry.first().children().length).toBeGreaterThan(0);
                 done();
             });
 
