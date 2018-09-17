@@ -123,23 +123,24 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
         describe('New Feed Selection', function() {
-            let firstFeedHeader, secondFeedHeader;
+            let firstFeed, secondFeed;
 
             beforeEach(function(done) {
                 loadFeed(0, function() {
-                    // first feed, selecting first entry for comparing
-                    firstFeedHeader = $('.entry h2').first().text();
+                    // first feed
+                    firstFeed = $('.feed').html();
+
+                    loadFeed(1, function() {
+                        // second feed 
+                        secondFeed = $('.feed').html();
+                        done();
+                    });
                 });
 
-                loadFeed(1, function() {
-                    // second feed, selecting first entry for comparing 
-                    secondFeedHeader = $('.entry h2').first().text();
-                    done();
-                });
             });
 
             it('contents of each feed should be different', function(done) {
-                expect(firstFeedHeader).not.toMatch(secondFeedHeader);
+                expect(firstFeed).not.toMatch(secondFeed);
                 done();
             });
         });
