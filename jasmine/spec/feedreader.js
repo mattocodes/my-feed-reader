@@ -63,7 +63,7 @@ $(function() {
         it('by default is hidden', function() {
             expect($('body').hasClass('menu-hidden')).toBe(true);
 
-        })
+        });
 
         /** 
          * Ensures that the menu changes visibility when the 
@@ -91,7 +91,7 @@ $(function() {
         let entry;
         beforeEach(function(done) {
             loadFeed(0, function() {
-                entry = $('.entry-link .entry');
+                entry = $('.feed .entry');
                 done();
             });
         });
@@ -99,9 +99,8 @@ $(function() {
         /**
          * Ensures that the feed container has at least one entry
          */
-        it('feed container should have at least one entry', function(done) {
-            expect(entry.first().children().length).toBeGreaterThan(0);
-            done();
+        it('feed container should have at least one entry', function() {
+            expect(entry.length).toBeGreaterThan(0);
         });
 
     });
@@ -129,9 +128,8 @@ $(function() {
          * Ensures that the content of each feed changes when 
          * a new feed is loaded by the loadFeed function
          */
-        it('contents of each feed should be different', function(done) {
+        it('contents of each feed should be different', function() {
             expect(firstFeed).not.toMatch(secondFeed);
-            done();
         });
     });
 
